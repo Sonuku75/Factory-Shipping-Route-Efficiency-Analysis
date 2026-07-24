@@ -3,9 +3,9 @@ import pandas as pd
 import plotly.express as px
 from pathlib import Path
 
-# =====================================================
+
 # Page Configuration
-# =====================================================
+
 
 st.set_page_config(
     page_title="Ship Mode Analysis",
@@ -13,26 +13,26 @@ st.set_page_config(
     layout="wide"
 )
 
-# =====================================================
+
 # Load Dataset
-# =====================================================
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DATA_PATH = BASE_DIR / "data" / "processed" / "feature_engineered_dataset.csv"
 
 df = pd.read_csv(DATA_PATH)
 
-# =====================================================
+
 # Page Title
-# =====================================================
+
 
 st.title("🚚 Ship Mode Analysis Dashboard")
 
 st.markdown("---")
 
-# =====================================================
+
 # Ship Mode Summary
-# =====================================================
+
 
 ship_mode_summary = (
     df.groupby("Ship Mode")
@@ -45,9 +45,9 @@ ship_mode_summary = (
       .reset_index()
 )
 
-# =====================================================
+
 # KPI Cards
-# =====================================================
+
 
 total_modes = ship_mode_summary["Ship Mode"].nunique()
 total_shipments = ship_mode_summary["Total_Shipments"].sum()
@@ -70,15 +70,15 @@ with col4:
 
 st.markdown("---")
 
-# =====================================================
+
 # Ship Mode Charts
-# =====================================================
+
 
 left_col, right_col = st.columns(2)
 
-# -----------------------------
+
 # Shipments by Ship Mode
-# -----------------------------
+
 
 with left_col:
 
@@ -92,9 +92,9 @@ with left_col:
 
     st.plotly_chart(fig_shipments, use_container_width=True)
 
-# -----------------------------
+
 # Average Lead Time
-# -----------------------------
+
 
 with right_col:
 
@@ -110,15 +110,14 @@ with right_col:
 
 st.markdown("---")
 
-# =====================================================
+
 # Sales & Profit Analysis
-# =====================================================
 
 left_col, right_col = st.columns(2)
 
-# -----------------------------
+
 # Sales by Ship Mode
-# -----------------------------
+
 
 with left_col:
 
@@ -133,9 +132,9 @@ with left_col:
 
     st.plotly_chart(fig_sales, use_container_width=True)
 
-# -----------------------------
+
 # Profit by Ship Mode
-# -----------------------------
+
 
 with right_col:
 
@@ -152,9 +151,9 @@ with right_col:
 
 st.markdown("---")
 
-# =====================================================
+
 # Ship Mode Summary Table
-# =====================================================
+
 
 st.subheader("📋 Ship Mode Summary")
 
@@ -172,9 +171,9 @@ st.dataframe(
 
 st.markdown("---")
 
-# =====================================================
+
 # Download Summary
-# =====================================================
+
 
 csv = display_df.to_csv(index=False).encode("utf-8")
 
@@ -187,9 +186,9 @@ st.download_button(
 
 st.markdown("---")
 
-# =====================================================
+
 # Business Insights
-# =====================================================
+
 
 st.subheader("💡 Business Insights")
 
