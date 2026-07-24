@@ -3,9 +3,9 @@ import pandas as pd
 import plotly.express as px
 from pathlib import Path
 
-# =====================================================
+
 # Page Configuration
-# =====================================================
+
 
 st.set_page_config(
     page_title="Route Analysis",
@@ -13,25 +13,25 @@ st.set_page_config(
     layout="wide"
 )
 
-# =====================================================
+
 # Load Dataset
-# =====================================================
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DATA_PATH = BASE_DIR / "data" / "processed" / "feature_engineered_dataset.csv"
 
 df = pd.read_csv(DATA_PATH)
 
-# =====================================================
+
 # Page Title
-# =====================================================
+
 
 st.title("🛣️ Route Analysis Dashboard")
 st.markdown("---")
 
-# =====================================================
+
 # Route KPIs
-# =====================================================
+
 
 total_routes = df["Factory_to_State"].nunique()
 
@@ -69,9 +69,9 @@ with col4:
 
 st.markdown("---")
 
-# =====================================================
+
 # Fastest Routes
-# =====================================================
+
 
 fastest_routes = (
     df.groupby("Factory_to_State")
@@ -93,9 +93,9 @@ fig_fastest = px.bar(
     title="⚡ Top 10 Fastest Routes"
 )
 
-# =====================================================
+
 # Slowest Routes
-# =====================================================
+
 
 slowest_routes = (
     df.groupby("Factory_to_State")
@@ -117,9 +117,7 @@ fig_slowest = px.bar(
     title="🐢 Top 10 Slowest Routes"
 )
 
-# =====================================================
 # Route Comparison
-# =====================================================
 
 left_col, right_col = st.columns(2)
 
@@ -131,9 +129,9 @@ with right_col:
 
 st.markdown("---")
 
-# =====================================================
+
 # Route Summary Table
-# =====================================================
+
 
 route_summary = (
     df.groupby("Factory_to_State")
@@ -157,9 +155,9 @@ st.dataframe(
 
 st.markdown("---")
 
-# =====================================================
+
 # Download Route Summary
-# =====================================================
+
 
 csv = route_summary.to_csv(index=False).encode("utf-8")
 
@@ -172,9 +170,9 @@ st.download_button(
 
 st.markdown("---")
 
-# =====================================================
+
 # Route Insights
-# =====================================================
+
 
 st.subheader("📌 Route Insights")
 
